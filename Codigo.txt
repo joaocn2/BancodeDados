@@ -96,16 +96,20 @@ def excluir(conexao):
     time.sleep(1)
     print('Escolha o player a ser removido')
     idd = int(input('\n ID a ser removido os dados: '))
-    try:
-        cursor.execute("""DELETE FROM player WHERE id = ?""", (idd,))
-        conn.commit()
-        print('\n Registro excluido com sucesso.')
-        time.sleep(4)
-        os.system('cls' if os.name == 'nt' else 'clear')
-    except Error as erro:
-        print(erro)
-        time.sleep(7)
-        os.system('cls' if os.name == 'nt' else 'clear')
+    resp = input('Deseja remover mesmo? y , n')
+    if resp == 'y':
+        try:
+            cursor.execute("""DELETE FROM player WHERE id = ?""", (idd,))
+            conn.commit()
+            print('\n Registro excluido com sucesso.')
+            time.sleep(4)
+            os.system('cls' if os.name == 'nt' else 'clear')
+        except Error as erro:
+            print(erro)
+            time.sleep(7)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            menu(conn)
+    else:
         menu(conn)
 
 
